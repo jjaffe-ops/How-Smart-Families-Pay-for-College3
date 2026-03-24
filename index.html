@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SoFi College Prep Bootcamp — Lesson 3</title>
+<style>
+@font-face {
+  font-family: 'Larsseit';
+  font-weight: 800;
+  font-style: normal;
+  src: url('https://cdn.sofi.com/fonts/Larsseit-ExtraBold.woff2') format('woff2'),
+       url('https://cdn.sofi.com/fonts/Larsseit-ExtraBold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Larsseit';
+  font-weight: 800;
+  font-style: italic;
+  src: url('https://cdn.sofi.com/fonts/Larsseit-ExtraBoldItalic.woff2') format('woff2'),
+       url('https://cdn.sofi.com/fonts/Larsseit-ExtraBoldItalic.woff') format('woff');
+}
+@font-face {
+  font-family: 'TT Norms';
+  font-weight: 400;
+  font-style: normal;
+  src: url('https://cdn.sofi.com/fonts/TTNorms-Regular.woff2') format('woff2'),
+       url('https://cdn.sofi.com/fonts/TTNorms-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'TT Norms';
+  font-weight: 500;
+  font-style: normal;
+  src: url('https://cdn.sofi.com/fonts/TTNorms-Medium.woff2') format('woff2'),
+       url('https://cdn.sofi.com/fonts/TTNorms-Medium.woff') format('woff');
+}
+@font-face {
+  font-family: 'TT Norms';
+  font-weight: 700;
+  font-style: normal;
+  src: url('https://cdn.sofi.com/fonts/TTNorms-Bold.woff2') format('woff2'),
+       url('https://cdn.sofi.com/fonts/TTNorms-Bold.woff') format('woff');
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sofi-blue:    #00A2C7;
+  --ink:          #201747;
+  --karl:         #E5E1E6;
+  --buttercup:    #FED880;
+  --cantaloupe:   #DD7975;
+  --poppy:        #E03E52;
+  --eggplant:     #330072;
+  --gunmetal:     #53565A;
+  --taupe:        #AB989D;
+  --bone:         #F9F6EE;
+
+  --blue-light:   rgba(0,162,199,0.10);
+  --blue-mid:     rgba(0,162,199,0.22);
+  --buttercup-bg: rgba(254,216,128,0.20);
+  --poppy-bg:     rgba(224,62,82,0.08);
+  --white:        #FFFFFF;
+
+  --display: 'Larsseit', 'Arial Black', 'Impact', sans-serif;
+  --body:    'TT Norms', 'Helvetica Neue', Arial, sans-serif;
+  --col-max: 640px;
+}
+
+body { background: var(--karl); font-family: var(--body); color: var(--ink); -webkit-font-smoothing: antialiased; padding: 32px 16px 64px; line-height: 1; }
+.email-shell { max-width: var(--col-max); margin: 0 auto; background: var(--white); border-radius: 6px; overflow: hidden; box-shadow: 0 4px 40px rgba(32,23,71,0.13); }
+
+/* TOPBAR */
+.topbar { background: var(--ink); padding: 14px 32px; display: flex; align-items: center; gap: 10px; }
+.wordmark { font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: -0.5px; color: var(--white); }
+.topbar-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.22); }
+.topbar-series { font-family: var(--body); font-weight: 500; font-size: 12px; color: rgba(255,255,255,0.58); }
+
+/* PROGRESS */
+.progress-rail { background: var(--eggplant); padding: 14px 32px 16px; }
+.progress-label { font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+.progress-steps { display: flex; align-items: center; gap: 5px; }
+.step-pill { display: flex; align-items: center; gap: 5px; padding: 4px 10px 4px 7px; border-radius: 20px; font-family: var(--body); font-size: 11px; font-weight: 700; white-space: nowrap; }
+.step-pill.done     { background: rgba(0,162,199,0.20); color: var(--sofi-blue); }
+.step-pill.active   { background: var(--sofi-blue); color: var(--ink); }
+.step-pill.upcoming { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.32); }
+.step-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.step-conn { flex: 1; height: 1px; background: rgba(255,255,255,0.12); min-width: 6px; max-width: 14px; }
+
+/* HERO */
+.hero { background: var(--ink); padding: 52px 44px 48px; position: relative; overflow: hidden; }
+.hero-glow  { position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(0,162,199,0.15) 0%, transparent 65%); pointer-events: none; }
+.hero-glow2 { position: absolute; bottom: -60px; left: 20px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(51,0,114,0.45) 0%, transparent 70%); pointer-events: none; }
+.kicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.kicker-bar { width: 24px; height: 2px; background: var(--sofi-blue); border-radius: 1px; }
+.kicker-text { font-family: var(--body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sofi-blue); }
+.hero-title { font-family: var(--display); font-weight: 800; font-size: 38px; line-height: 1.08; color: var(--white); letter-spacing: -0.8px; margin-bottom: 20px; max-width: 460px; }
+.hero-title em { font-style: italic; color: var(--sofi-blue); }
+.hero-deck { font-family: var(--body); font-size: 15px; font-weight: 400; line-height: 1.66; color: rgba(255,255,255,0.72); max-width: 440px; }
+
+/* SNAPSHOT STRIP */
+.snap-strip { background: var(--bone); padding: 0 44px; border-bottom: 1px solid var(--karl); }
+.snap-grid { display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; padding: 26px 0; }
+.snap-div { background: var(--karl); margin: 4px 0; }
+.snap-item { padding: 0 22px; }
+.snap-item:first-child { padding-left: 0; }
+.snap-item:last-child { padding-right: 0; }
+.snap-eye  { font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--taupe); margin-bottom: 6px; }
+.snap-val  { font-family: var(--display); font-weight: 800; font-size: 19px; line-height: 1.15; color: var(--ink); margin-bottom: 5px; letter-spacing: -0.3px; }
+.snap-desc { font-family: var(--body); font-size: 12px; line-height: 1.50; color: var(--gunmetal); }
+
+/* BODY */
+.body-wrap { padding: 44px 44px 0; }
+.sec-label { display: inline-block; font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sofi-blue); border-bottom: 2px solid var(--sofi-blue); padding-bottom: 8px; margin-bottom: 18px; }
+.body-p { font-family: var(--body); font-size: 15.5px; font-weight: 400; line-height: 1.74; color: var(--ink); margin-bottom: 18px; }
+.body-p strong { font-weight: 700; }
+.body-p em { font-style: italic; }
+.body-p:last-child { margin-bottom: 0; }
+
+/* EXPERT TAG */
+.expert-tag { display: inline-flex; align-items: center; gap: 10px; background: var(--blue-light); border: 1px solid var(--blue-mid); border-radius: 24px; padding: 5px 14px 5px 7px; margin-bottom: 22px; }
+.expert-av { width: 26px; height: 26px; border-radius: 50%; background: var(--sofi-blue); display: flex; align-items: center; justify-content: center; font-family: var(--body); font-size: 9px; font-weight: 700; color: var(--white); flex-shrink: 0; }
+.expert-name { font-family: var(--body); font-size: 12px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.expert-role { font-family: var(--body); font-size: 11px; font-weight: 400; color: var(--gunmetal); line-height: 1.2; margin-top: 1px; }
+
+/* STAT CALLOUT */
+.stat-block { margin: 28px 0; background: var(--eggplant); border-radius: 6px; padding: 32px 36px; display: flex; align-items: flex-start; gap: 26px; position: relative; overflow: hidden; }
+.stat-block-glow { position: absolute; bottom: -40px; right: -30px; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, rgba(0,162,199,0.18) 0%, transparent 70%); pointer-events: none; }
+.stat-num { font-family: var(--display); font-weight: 800; font-size: 60px; line-height: 1; color: var(--sofi-blue); flex-shrink: 0; letter-spacing: -2px; }
+.stat-txt { padding-top: 8px; }
+.stat-hed { font-family: var(--body); font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 7px; line-height: 1.35; }
+.stat-det { font-family: var(--body); font-size: 13.5px; font-weight: 400; line-height: 1.62; color: rgba(255,255,255,0.82); }
+
+/* PULL QUOTE */
+.pq { margin: 28px 0; padding: 28px 32px 28px 30px; border-left: 3px solid var(--sofi-blue); background: var(--bone); border-radius: 0 6px 6px 0; }
+.pq-mark { font-family: var(--display); font-weight: 800; font-size: 52px; line-height: 0.55; color: var(--sofi-blue); display: block; margin-bottom: 16px; opacity: 0.65; }
+.pq-text { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 19px; line-height: 1.40; color: var(--ink); margin-bottom: 14px; letter-spacing: -0.2px; }
+.pq-attr { font-family: var(--body); font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--taupe); }
+
+/* ASIDE BOX — buttercup */
+.aside { margin: 28px 0; background: var(--buttercup-bg); border: 1px solid var(--buttercup); border-radius: 6px; padding: 22px 26px; }
+.aside-flag { display: flex; align-items: center; gap: 8px; font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--ink); margin-bottom: 10px; }
+.aside-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--buttercup); flex-shrink: 0; border: 1px solid rgba(32,23,71,0.20); }
+.aside-title { font-family: var(--display); font-weight: 800; font-size: 16px; color: var(--ink); margin-bottom: 10px; line-height: 1.3; letter-spacing: -0.2px; }
+.aside-p { font-family: var(--body); font-size: 14px; font-weight: 400; line-height: 1.65; color: var(--gunmetal); margin-bottom: 8px; }
+.aside-p:last-child { margin-bottom: 0; }
+.aside-p strong { font-weight: 700; color: var(--ink); }
+
+/* WARNING ASIDE — poppy */
+.warn { margin: 22px 0; padding: 18px 22px; background: var(--poppy-bg); border-left: 3px solid var(--poppy); border-radius: 0 6px 6px 0; }
+.warn-label { font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--poppy); margin-bottom: 6px; }
+.warn-text { font-family: var(--body); font-size: 13.5px; font-weight: 400; line-height: 1.62; color: var(--gunmetal); }
+.warn-text strong { font-weight: 700; color: var(--ink); }
+
+/* INLINE CALLOUT */
+.callout { margin: 22px 0; padding: 20px 26px; background: var(--bone); border-left: 3px solid var(--ink); border-radius: 0 6px 6px 0; }
+.callout-label { font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--taupe); margin-bottom: 8px; }
+.callout-text { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 18px; line-height: 1.35; color: var(--ink); letter-spacing: -0.2px; }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--karl); margin: 36px 0; }
+
+/* RULE CARD — on dark eggplant: headline white, body text 0.88 */
+.rule-card { margin: 26px 0; border-radius: 6px; overflow: hidden; background: var(--eggplant); }
+.rule-head { padding: 20px 24px; background: rgba(0,162,199,0.14); border-bottom: 1px solid rgba(0,162,199,0.22); }
+.rule-eye { font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sofi-blue); margin-bottom: 7px; }
+.rule-title { font-family: var(--display); font-weight: 800; font-style: italic; font-size: 19px; color: var(--white); line-height: 1.25; letter-spacing: -0.2px; }
+.rule-body { padding: 22px 24px; }
+.rule-desc { font-family: var(--body); font-size: 14px; font-weight: 400; line-height: 1.68; color: rgba(255,255,255,0.88); margin-bottom: 18px; }
+.rule-examples { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rule-ex { background: rgba(255,255,255,0.07); border-radius: 4px; padding: 14px 16px; border-left: 2px solid rgba(0,162,199,0.45); }
+.rule-ex.caution { border-left-color: rgba(221,121,117,0.70); }
+.rule-ex-label  { font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(255,255,255,0.50); margin-bottom: 6px; }
+.rule-ex-career { font-family: var(--body); font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.rule-ex-detail { font-family: var(--body); font-size: 12.5px; font-weight: 400; line-height: 1.52; color: rgba(255,255,255,0.75); }
+
+/* LOAN TABLE */
+.loan-table { margin: 24px 0; border-radius: 6px; overflow: hidden; border: 1px solid var(--karl); }
+.loan-row { display: grid; grid-template-columns: 1.6fr 1fr 1fr; border-bottom: 1px solid var(--karl); }
+.loan-row:last-child { border-bottom: none; }
+.loan-head-row { background: var(--ink); }
+.loan-cell { padding: 12px 16px; font-family: var(--body); font-size: 13px; font-weight: 400; line-height: 1.45; color: var(--gunmetal); }
+.loan-head-row .loan-cell { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+.loan-cell.label { font-weight: 700; color: var(--ink); }
+.loan-cell.flag  { font-weight: 700; color: var(--poppy); }
+.loan-row:nth-child(odd):not(.loan-head-row) { background: var(--bone); }
+
+/* 4-STEP BUILD */
+.build-step { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--karl); align-items: flex-start; }
+.build-step:last-child { border-bottom: none; }
+.build-num { flex-shrink: 0; width: 36px; height: 36px; background: var(--ink); color: var(--sofi-blue); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 15px; margin-top: 1px; }
+.build-title { font-family: var(--body); font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 5px; line-height: 1.3; }
+.build-p { font-family: var(--body); font-size: 14px; font-weight: 400; line-height: 1.65; color: var(--gunmetal); }
+
+/* CEILING CALC — on eggplant bg: labels 0.88, values full white */
+.ceiling-bg { background: var(--eggplant); border-radius: 6px; padding: 24px 28px; margin: 22px 0 0; }
+.ceiling-eye { font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--sofi-blue); margin-bottom: 16px; }
+.ceiling-row { display: flex; align-items: baseline; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.10); }
+.ceiling-row:last-child { border-bottom: none; padding-bottom: 0; }
+.ceiling-lbl { font-family: var(--body); font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.82); }
+.ceiling-val { font-family: var(--display); font-weight: 800; font-size: 18px; color: var(--white); letter-spacing: -0.3px; }
+.ceiling-row.total .ceiling-lbl { font-weight: 700; color: rgba(255,255,255,0.92); }
+.ceiling-row.total .ceiling-val { font-size: 26px; color: var(--sofi-blue); }
+
+/* HOMEWORK */
+.hw { margin: 40px 0 0; background: var(--eggplant); padding: 34px 44px; }
+.hw-eye { font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sofi-blue); margin-bottom: 6px; }
+.hw-title { font-family: var(--display); font-weight: 800; font-size: 22px; color: var(--white); margin-bottom: 24px; line-height: 1.15; letter-spacing: -0.3px; }
+.hw-item { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
+.hw-item:last-child { margin-bottom: 0; }
+.hw-box { flex-shrink: 0; width: 20px; height: 20px; border-radius: 4px; border: 1.5px solid rgba(0,162,199,0.50); margin-top: 2px; }
+.hw-text { font-family: var(--body); font-size: 14.5px; font-weight: 400; line-height: 1.60; color: rgba(255,255,255,0.90); }
+.hw-text strong { color: var(--white); font-weight: 700; }
+
+/* NEXT UP */
+.next { background: var(--bone); border-top: 2px solid var(--karl); padding: 28px 44px 34px; }
+.next-eye { font-family: var(--body); font-size: 10px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--taupe); margin-bottom: 10px; }
+.next-title { font-family: var(--display); font-weight: 800; font-size: 20px; color: var(--ink); margin-bottom: 8px; line-height: 1.2; letter-spacing: -0.3px; }
+.next-desc { font-family: var(--body); font-size: 13.5px; font-weight: 400; line-height: 1.62; color: var(--gunmetal); margin-bottom: 16px; }
+.next-cta { display: inline-flex; align-items: center; gap: 6px; font-family: var(--body); font-size: 13px; font-weight: 700; color: var(--sofi-blue); text-decoration: none; border-bottom: 2px solid var(--sofi-blue); padding-bottom: 2px; }
+
+/* FOOTER */
+.footer { background: var(--ink); padding: 28px 44px; text-align: center; }
+.footer-mark { font-family: var(--display); font-weight: 800; font-size: 16px; color: var(--white); letter-spacing: -0.3px; margin-bottom: 14px; }
+.footer-links { margin-bottom: 14px; }
+.footer-links a { font-family: var(--body); font-size: 12px; font-weight: 500; color: var(--taupe); text-decoration: none; margin: 0 10px; }
+.footer-legal { font-family: var(--body); font-size: 11px; font-weight: 400; line-height: 1.65; color: rgba(255,255,255,0.30); max-width: 460px; margin: 0 auto; }
+
+@media (max-width: 520px) {
+  body { padding: 0 0 40px; }
+  .email-shell { border-radius: 0; }
+  .topbar { padding: 14px 20px; }
+  .progress-rail { padding: 12px 20px 14px; }
+  .step-pill { display: none; }
+  .step-pill.active, .step-pill.done { display: flex; }
+  .step-conn { display: none; }
+  .hero { padding: 38px 24px 34px; }
+  .hero-title { font-size: 30px; }
+  .snap-strip { padding: 0 24px; }
+  .snap-grid { grid-template-columns: 1fr; gap: 18px; }
+  .snap-div { display: none; }
+  .snap-item { padding: 0; }
+  .body-wrap { padding: 32px 24px 0; }
+  .stat-block { padding: 24px; flex-direction: column; gap: 8px; }
+  .stat-num { font-size: 48px; }
+  .rule-examples { grid-template-columns: 1fr; }
+  .loan-row { grid-template-columns: 1fr 1fr; }
+  .loan-cell:nth-child(3), .loan-head-row .loan-cell:nth-child(3) { display: none; }
+  .hw { padding: 28px 24px; }
+  .next { padding: 24px; }
+  .footer { padding: 24px; }
+}
+</style>
+</head>
+<body>
+<div class="email-shell">
+
+  <div class="topbar">
+    <div class="wordmark">SoFi</div>
+    <div class="topbar-divider"></div>
+    <div class="topbar-series">College Prep Bootcamp</div>
+  </div>
+
+  <div class="progress-rail">
+    <div class="progress-label">Your progress &nbsp;·&nbsp; 6 lessons</div>
+    <div class="progress-steps">
+      <div class="step-pill done"><div class="step-dot"></div>Lesson 1</div>
+      <div class="step-conn"></div>
+      <div class="step-pill done"><div class="step-dot"></div>Lesson 2</div>
+      <div class="step-conn"></div>
+      <div class="step-pill active"><div class="step-dot"></div>Lesson 3</div>
+      <div class="step-conn"></div>
+      <div class="step-pill upcoming"><div class="step-dot"></div>Lesson 4</div>
+      <div class="step-conn"></div>
+      <div class="step-pill upcoming"><div class="step-dot"></div>Lesson 5</div>
+      <div class="step-conn"></div>
+      <div class="step-pill upcoming"><div class="step-dot"></div>Lesson 6</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="kicker"><div class="kicker-bar"></div><div class="kicker-text">Lesson 3 of 6</div></div>
+    <h1 class="hero-title">Set your <em>number.</em> Before the schools set it for you</h1>
+    <p class="hero-deck">93% of student loan borrowers say they would have approached college financing differently if they could do it over. Their top regret: not having sought financial advice sooner.</p>
+  </div>
+
+  <div class="snap-strip">
+    <div class="snap-grid">
+      <div class="snap-item">
+        <div class="snap-eye">The Reality</div>
+        <div class="snap-val">93%</div>
+        <div class="snap-desc">of student loan borrowers say they would have approached this differently</div>
+      </div>
+      <div class="snap-div"></div>
+      <div class="snap-item">
+        <div class="snap-eye">The Expert Insight</div>
+        <div class="snap-val">Baldridge + Walsh</div>
+        <div class="snap-desc">College funding specialist & SoFi Head of Financial Planning</div>
+      </div>
+      <div class="snap-div"></div>
+      <div class="snap-item">
+        <div class="snap-eye">The Parent Move</div>
+        <div class="snap-val">Pick a number</div>
+        <div class="snap-desc">Before the letters arrive — not after</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-wrap">
+
+    <p class="body-p" style="margin-top:6px;">Picture this. The acceptance letter arrives. Your student gets in. The moment you've both been working toward is right in front of you. You hug. Maybe you cry. You take a photo.</p>
+
+    <p class="body-p">A few weeks later, the financial aid package comes. You open it. You read it twice. You do the math. The number is higher than you expected. Significantly higher. But your teen has already told their friends, looked up the dining halls on Instagram, and started imagining their life there. And they have no idea.</p>
+
+    <p class="body-p">That's the moment most families' college financial planning breaks down. Not because the news is bad. Because the conversation that should have happened months ago never did.</p>
+
+    <p class="body-p">The families who handle this well have one thing the others don't: they already had a number before the letter arrived. A ceiling. Something they'd agreed on together calmly, before any school made an offer that made saying no feel impossible.</p>
+
+    <p class="body-p">This lesson is about building one number before that moment arrives — your family's total college budget. It's made up of what you can contribute and what your student can responsibly borrow. Every school on your list either fits inside it or it doesn't.</p>
+
+    <div class="stat-block">
+      <div class="stat-block-glow"></div>
+      <div class="stat-num">93%</div>
+      <div class="stat-txt">
+        <div class="stat-hed">of student loan borrowers say they would have approached college financing differently</div>
+        <div class="stat-det">Their top regret: not having sought financial advice sooner. Most didn't have a number before the letters arrived.</div>
+      </div>
+    </div>
+
+    <div class="sec-label">What you're actually looking at</div>
+
+    <p class="body-p" style="margin-top:16px;">The average private college lists at around $63,000 a year. Families actually pay closer to $36,000. But that gap varies wildly depending on your income, your assets, your state, and the specific schools on your list.</p>
+
+    <div class="divider"></div>
+
+    <div class="sec-label">The number every family needs before applications go in</div>
+
+    <div class="expert-tag" style="margin-top:16px;">
+      <div class="expert-av">BB</div>
+      <div>
+        <div class="expert-name">Brad Baldridge</div>
+        <div class="expert-role">Certified financial planner, college funding specialist</div>
+      </div>
+    </div>
+
+    <p class="body-p">"Financial constraints need to come up early and often," Baldridge told us. "A lot of parents don't put guardrails on it because they don't know what they're getting into. They say, you can go wherever you want — and then they realize some colleges have price tags that are out of reach."</p>
+
+    <p class="body-p">His rule of thumb is the clearest framework we've found for families trying to set a student borrowing limit before the offers roll in:</p>
+
+    <div class="rule-card">
+      <div class="rule-head">
+        <div class="rule-eye">Baldridge's Rule of Thumb — The First-Year Salary Rule</div>
+        <div class="rule-title">Total borrowing should not exceed your student's expected first-year income.</div>
+      </div>
+      <div class="rule-body">
+        <p class="rule-desc">"A nurse coming out at $75,000 — that level of debt is manageable for most people. A social worker starting at $40,000? The math changes fast." If your student's career direction is still undecided, Baldridge's advice is to borrow on the lower end and leave room to adjust. "You can always revisit. But you can't undo the debt."</p>
+        <div class="rule-examples">
+          <div class="rule-ex">
+            <div class="rule-ex-label">Manageable</div>
+            <div class="rule-ex-career">Nursing</div>
+            <div class="rule-ex-detail">~$75K starting salary. That level of debt is manageable for most people.</div>
+          </div>
+          <div class="rule-ex caution">
+            <div class="rule-ex-label">Watch carefully</div>
+            <div class="rule-ex-career">Social work</div>
+            <div class="rule-ex-detail">~$40K starting salary. The math changes fast at $75K in total debt.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="body-p">Walsh approaches the same question from a different angle: monthly cash flow. His guideline — keep loan payments to around 15 to 20 percent of your student's starting salary — is a useful gut-check once you have a number.</p>
+
+    <div class="divider"></div>
+
+    <div class="sec-label">Parents and students aren't always on the hook for the same loans</div>
+
+    <div class="expert-tag" style="margin-top:16px;">
+      <div class="expert-av">BW</div>
+      <div>
+        <div class="expert-name">Brian Walsh</div>
+        <div class="expert-role">Head of Financial Planning, SoFi</div>
+      </div>
+    </div>
+
+    <p class="body-p">A Parent PLUS loan stays in the parent's name. Permanently. "People don't fully appreciate who's responsible for paying the loan back," Walsh says. "A lot of families just assume that once the kid gets done with school, it's going to transfer to their name. That's not technically how it works."</p>
+
+    <p class="body-p">If your student can't make payments after graduation, the PLUS loan is still yours — not theirs. That's an important structural difference between a Parent PLUS loan and a co-signed private loan. With a PLUS loan, the parent is the borrower. With a co-signed private loan, the student is the primary borrower and the parent is secondarily liable. Neither is inherently right or wrong. But they carry different implications for a parent's retirement, their credit, and their long-term financial picture.</p>
+
+    <div class="loan-table">
+      <div class="loan-row loan-head-row">
+        <div class="loan-cell"></div>
+        <div class="loan-cell">Parent PLUS Loan</div>
+        <div class="loan-cell">Co-signed Private</div>
+      </div>
+      <div class="loan-row">
+        <div class="loan-cell label">Primary borrower</div>
+        <div class="loan-cell flag">Parent — permanently</div>
+        <div class="loan-cell">Student</div>
+      </div>
+      <div class="loan-row">
+        <div class="loan-cell label">If student can't pay</div>
+        <div class="loan-cell flag">Parent still owes it</div>
+        <div class="loan-cell">Parent secondarily liable</div>
+      </div>
+      <div class="loan-row">
+        <div class="loan-cell label">Can transfer to student?</div>
+        <div class="loan-cell flag">No</div>
+        <div class="loan-cell">Depends on lender</div>
+      </div>
+      <div class="loan-row">
+        <div class="loan-cell label">Affects parent's retirement?</div>
+        <div class="loan-cell flag">Yes, directly</div>
+        <div class="loan-cell">Can, if co-signed</div>
+      </div>
+    </div>
+
+    <div class="pq">
+      <span class="pq-mark">"</span>
+      <p class="pq-text">You need to know you're on track for retirement, and your own finances are in order, before taking on that debt for your kid. That's not harsh — it's just the math.</p>
+      <div class="pq-attr">Brian Walsh &nbsp;·&nbsp; Head of Financial Planning, SoFi</div>
+    </div>
+
+    <div class="sec-label" style="margin-top:36px;">The rules on Parent PLUS loans just changed</div>
+
+    <p class="body-p" style="margin-top:16px;">For years, Parent PLUS loans had no hard cap. Parents could borrow up to the full cost of attendance. Starting July 1, 2026, that changes. There are now annual and lifetime limits on what parents can borrow.</p>
+
+    <div class="warn">
+      <div class="warn-label">Action required</div>
+      <p class="warn-text">If your family was planning to use PLUS loans to cover a significant portion of a school's cost, go back to the net price calculator for any school on your list where that was the plan. <strong>Run the numbers again with the new caps applied.</strong> If the gap between what federal loans now cover and what the school costs is larger than your family can fill another way, that school needs a second look.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sec-label">College money doesn't come from nowhere</div>
+
+    <p class="body-p" style="margin-top:16px;">College isn't a separate financial category. It competes for the same dollars as everything else. Every $10,000 borrowed for college is $10,000 not invested for retirement. Over time, that tradeoff compounds.</p>
+
+    <p class="body-p">Every family draws that line somewhere. Drawing it before the offers arrive is the whole point of this lesson.</p>
+
+    <div class="sec-label" style="margin-top:36px;">Build your family's borrowing ceiling</div>
+
+    <div class="build-step" style="margin-top:20px;">
+      <div class="build-num">1</div>
+      <div>
+        <div class="build-title">Write down one number.</div>
+        <p class="build-p">What's the most your family could realistically contribute to college per year? A rough estimate is fine. Getting it out of your head and onto paper is the whole point of this step.</p>
+      </div>
+    </div>
+    <div class="build-step">
+      <div class="build-num">2</div>
+      <div>
+        <div class="build-title">See what that number actually means.</div>
+        <p class="build-p">Before you go further, pull up a loan calculator with your student. A $60,000 loan sounds manageable. A $700 monthly payment on a $40,000 salary feels very different. Make the debt real for your student — not just in the parent's head.</p>
+      </div>
+    </div>
+    <div class="build-step">
+      <div class="build-num">3</div>
+      <div>
+        <div class="build-title">Apply Baldridge's First-Year Salary Rule.</div>
+        <p class="build-p">Total student borrowing should not exceed your student's expected first-year salary. That's not a soft guideline — it's the number Baldridge uses as a ceiling with his own clients. If the career path is undecided, use a conservative estimate and plan to revisit.</p>
+      </div>
+    </div>
+    <div class="build-step">
+      <div class="build-num">4</div>
+      <div>
+        <div class="build-title">Add both numbers. That's your family's ceiling.</div>
+        <p class="build-p">If you can contribute $15,000 a year and your student's expected starting salary is $50,000, your ceiling is $110,000 total across four years. Any school whose net price comes in above that number needs either more aid or a harder conversation.</p>
+      </div>
+    </div>
+
+    <div class="ceiling-bg">
+      <div class="ceiling-eye">Step 4 example</div>
+      <div class="ceiling-row">
+        <div class="ceiling-lbl">Parent contribution ($15,000 × 4 years)</div>
+        <div class="ceiling-val">$60,000</div>
+      </div>
+      <div class="ceiling-row">
+        <div class="ceiling-lbl">Student loan limit (expected first-year salary)</div>
+        <div class="ceiling-val">$50,000</div>
+      </div>
+      <div class="ceiling-row total">
+        <div class="ceiling-lbl">Your family's ceiling</div>
+        <div class="ceiling-val">$110,000</div>
+      </div>
+    </div>
+
+    <div class="divider" style="margin-bottom:0;"></div>
+
+  </div>
+
+  <div class="hw">
+    <div class="hw-eye">Before Lesson 4</div>
+    <h2 class="hw-title">Build your family's borrowing ceiling</h2>
+    <div class="hw-item">
+      <div class="hw-box"></div>
+      <div class="hw-text"><strong>Complete all four steps above</strong> and write down your family's total ceiling number.</div>
+    </div>
+    <div class="hw-item">
+      <div class="hw-box"></div>
+      <div class="hw-text"><strong>Sit down with your student and run a loan payment calculator together.</strong> Use a realistic starting salary for their area of interest. Make the monthly number visible — not just the total.</div>
+    </div>
+    <div class="hw-item">
+      <div class="hw-box"></div>
+      <div class="hw-text"><strong>Answer the question most families never settle:</strong> of the total cost, how much is the parent's responsibility and how much is the student's? Write it down before the letters arrive.</div>
+    </div>
+  </div>
+
+  <div class="next">
+    <div class="next-eye">Coming in Lesson 4</div>
+    <h3 class="next-title">You now have a ceiling. Most families never get this far.</h3>
+    <p class="next-desc">In the next lesson, you'll learn how to use it — because the schools competing for your student are often willing to negotiate, and most families never ask.</p>
+    <a href="#" class="next-cta">Read Lesson 4 →</a>
+  </div>
+
+  <div class="footer">
+    <div class="footer-mark">SoFi</div>
+    <div class="footer-links">
+      <a href="#">Unsubscribe</a>
+      <a href="#">View in browser</a>
+      <a href="#">Privacy policy</a>
+    </div>
+    <p class="footer-legal">© 2025 SoFi Technologies, Inc. All rights reserved. 234 1st Street, San Francisco, CA 94105. This email was sent because you signed up for the SoFi College Prep Bootcamp. SoFi loans are offered by SoFi Bank, N.A., NMLS #696891.</p>
+  </div>
+
+</div>
+</body>
+</html>
